@@ -40,7 +40,7 @@ describe "UserPages" do
         #valid_signin(user)
         fill_in "Email",    with: user.email.upcase
         fill_in "Password", with: user.password
-        click_button "Sign in" 
+        find('div.span-6.offset-3').click_button "Sign in" 
       end
       it "should create user" do
         expect { click_button "Create my account" }.to change(User, :count).by(1)
@@ -73,10 +73,12 @@ describe "UserPages" do
       let(:new_name) { "New Name" }
       let(:new_email) { "New Email" }
       before do
-        fill_in "Name",     with: new_name
-        fill_in "Email",    with: new_email
-        fill_in "Password",  with: user.password
-        fill_in "Confirm Password", with: user.password
+        within('div.span-6-offset-3') do
+          fill_in "Name",     with: new_name
+          fill_in "Email",    with: new_email
+          fill_in "Password",  with: user.password
+          fill_in "Confirm Password", with: user.password
+        end
       end
       it { should have_title(new_name) }
       it { should have_selector('div.alert.alert-success') } 

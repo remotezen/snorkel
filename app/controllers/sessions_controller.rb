@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
       redirect_to user
     else
        login_cookie
-      flash.now[:error] = "Invalid email/password combination #{view_context.pluralize(login_failures,'failure')} to login"
-      #{}"
+      flash.now[:error] = "Invalid email/password combination 
+      #{view_context.pluralize(login_failures,'failure')} to login"
+      
       render 'new'
     end
   end

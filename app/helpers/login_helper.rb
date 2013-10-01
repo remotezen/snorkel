@@ -17,4 +17,5 @@ module LoginHelper
   def set_login_count
     cookies[:login_attempts] = 1
   end
+  
 end
