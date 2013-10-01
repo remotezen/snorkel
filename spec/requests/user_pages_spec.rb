@@ -73,7 +73,7 @@ describe "UserPages" do
       let(:new_name) { "New Name" }
       let(:new_email) { "New Email" }
       before do
-        within('div.span-6-offset-3') do
+        within('.span-6') do
           fill_in "Name",     with: new_name
           fill_in "Email",    with: new_email
           fill_in "Password",  with: user.password
