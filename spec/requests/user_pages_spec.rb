@@ -3,6 +3,24 @@ require 'spec_helper'
 describe "UserPages" do
 
   subject {page}
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      visit users_path
+    end
+    it "should list each user" do
+      it { should have_title('All users') }
+      it { should have_content('All users') }
+    end
+    it "should list each user" do
+      User.all.each do |u|
+        expect(page).to have_selector('li', user.name)
+     end
+    end
+  end
+
   describe "signup page" do
     before {visit signup_path}
     it { should have_selector('h3', text: 'Sign up') }
