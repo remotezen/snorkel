@@ -10,3 +10,9 @@
     &:last-child{ border-bottom: 1px solid $grayLighter }
   }
 }
+.delete-user{ 
+  background: #FF1122;
+  color: red;
+  margin-right: 8px;
+  padding:1px;
+}

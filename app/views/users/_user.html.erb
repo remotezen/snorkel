@@ -1,6 +1,12 @@
-  <% @users.each do |u|%>
     <li>
-      <%= gravatar_for u, size:52 %>
-      <%= link_to u.name, u %>
+      <%= gravatar_for user, size:52 %>
+      <%= link_to user.name, user %>
+      <% if current_user.admin? && !current_user?(user) %>
+        <span class="delete-user">
+
+        <%= link_to "delete", user, method: :delete,
+          data: { confirm: 
+                  "Are you sure, you want to delete #{user.name }" }%>
+        </span>
+     <% end %>
     </li>
-  <% end %>

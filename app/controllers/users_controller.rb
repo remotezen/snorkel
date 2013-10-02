@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page])
   end
-  
-  def create
+
+ def create 
     @user = User.new(user_params)
     if @user.save
       sign_in @user
@@ -24,10 +24,16 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-  
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    flash[:success] = "User #{ user.name } id #{user.id } nuked"
+    redirect_to users_url
+  end
   def new
     @user = User.new
   end
+  
   def edit
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -53,7 +59,7 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name,:email,:password,
-                                 :password_confirmation) if params[:user]
+                    :password_confirmation) if params[:user]
   end
   def signed_in_user
     unless signed_in?

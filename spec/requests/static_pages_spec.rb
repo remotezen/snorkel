@@ -14,7 +14,7 @@ describe "StaticPages" do
       let(:page_title) {''}
       before { visit root_path }
       it "should have the right links on the layout" do
-        find('ul.nav').click_link 'About' 
+        click_link 'About' 
         expect(page).to have_title(full_title('About us'))
         click_link 'Help' 
         expect(page).to have_title(full_title('Help') )
