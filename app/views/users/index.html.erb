@@ -1,9 +1,9 @@
 <h3 class="master">
   All users
 </h3>
-<ul class="users">
-  <% users.each do |u|%>
-    <li class="user-stats">
+<ul class= 'users'>
+  <% @user.each do |u|%>
+    <li>
     <%= gravatar_for u, size:52 %>
     <%= link_to u.name, u %>
     </li>
