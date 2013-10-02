@@ -1,13 +1,8 @@
 <h3 class="master">
   All users
 </h3>
-<ul class= 'users'>
-  <% @user.each do |u|%>
-    <li>
-    <%= gravatar_for u, size:52 %>
-    <%= link_to u.name, u %>
-    </li>
-    
-  <% end %>
+<%= will_paginate %>
+<%= render @users %>
 </ul>
 
+<%= will_paginate %>
