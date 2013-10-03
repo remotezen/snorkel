@@ -10,7 +10,7 @@ end
 
 def  valid_signin(user)
   fill_in "Password", with: user.password
-  fill_in "Email", with: user.email
+  fill_in "Email", with: user.email.upcase
   click_button "Sign in"
 end
 def sign_in(user, options = {})

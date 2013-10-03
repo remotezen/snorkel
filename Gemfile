@@ -10,13 +10,11 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
-  # The following optional lines are part of the advanced setup.
-  # gem 'guard-rspec', '2.5.0'
-  # gem 'spork-rails', '4.0.0'
-  # gem 'guard-spork', '1.5.0'
-  # gem 'childprocess', '0.3.6'
+   gem 'guard-rspec', '2.5.0'
+   gem 'spork-rails', '4.0.0'
+   gem 'guard-spork', '1.5.0'
+   gem 'childprocess', '0.3.6'
 end
 
 group :test do
@@ -30,7 +28,7 @@ group :test do
   # gem 'growl', '1.0.3'
 
   # Uncomment these lines on Linux.
-  # gem 'libnotify', '0.8.0'
+   gem 'libnotify', '0.8.0'
 
   # Uncomment these lines on Windows.
   # gem 'rb-notifu', '0.0.4'
@@ -44,6 +42,7 @@ gem 'coffee-rails', '4.0.0'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
+gem 'pg', '0.15.1'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
