@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   end
   private
   def limit_signed_in_user
-    redirect_to current_user
+    redirect_to root_url
 
   end
   def user_params
