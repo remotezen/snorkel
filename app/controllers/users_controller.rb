@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     only: [:edit, :update]
   before_action :admin_user, 
     only: :destroy
-
+  before_action :limit_signed_in_user,
+    only: [:new, :create]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -30,9 +31,14 @@ class UsersController < ApplicationController
   end
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    flash[:success] = "User #{ user.name } id #{user.id } nuked"
-    redirect_to users_url
+    unless user.admin?
+      user.destroy
+      flash[:success] = "User #{ user.name } id #{user.id } nuked"
+      redirect_to users_url
+    else  
+      flash[:error] = "Admin users can't nuke themselves"
+      redirect_to current_user
+    end
   end
   def new
     @user = User.new
@@ -54,6 +60,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   private
+  def limit_signed_in_user
+    redirect_to current_user
+
+  end
   def user_params
     params.require(:user).permit(:name,:email,:password,
                     :password_confirmation) if params[:user]

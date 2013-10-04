@@ -6,6 +6,7 @@ module SessionsHelper
     cookies.delete :login_attempts
     self.current_user = user
   end
+  
   def current_user=(user)
     @current_user = user
   end
