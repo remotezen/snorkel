@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "StaticPages" do
   
   subject { page }
-  share_examples_for "all static pages" do
+  
+  shared_examples_for "all static pages" do
     it { should have_selector('h6', text: heading) }
     it { should have_title(full_title(page_title) ) }
   end
