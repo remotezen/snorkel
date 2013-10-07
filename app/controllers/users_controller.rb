@@ -57,7 +57,9 @@ class UsersController < ApplicationController
   end
   
   def show
+
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
   private
   def limit_signed_in_user
