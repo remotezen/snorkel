@@ -3,8 +3,18 @@
   <div class="field">
     <%= f.text_area :content, placeholder: "Compose new micropost..."
       %>
+          <p class="help-inline"><span class="counter"></span>
+    
   </div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
-<div id="chars"></div>
+<script type="text/javascript">
+		//default usage
+		//custom usage
+		$("#micropost_content").charCount({
+			allowed: 140,		
+			warning: 20,
+			counterText: 'Characters left: '	
+		});
+</script>
 

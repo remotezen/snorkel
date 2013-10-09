@@ -1,6 +1,6 @@
 <li class="micropost">
   <span class="content content1" >
-    <%= micropost.content %>
+    <%= wrap(micropost.content) %>
   </span>
   <span class="timestamp content2">
     <%= time_ago_in_words(micropost.created_at) %> ago

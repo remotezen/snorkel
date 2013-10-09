@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-  subject { page }
+  subject {page}
   
   describe "Home Page" do
     let(:heading) {'Snorkel'}
@@ -30,6 +30,11 @@ describe "StaticPages" do
          expect(page).to have_selector("li##{ i.id }", text: i.content)
         end
       end
+      describe "pagination" do 
+        before(:all) { 100.times { FactoryGirl.create(:micropost, 
+                                                      user: user, content: "Foo") } }
+        after(:all) { Micropost.delete_all }
+        it { should have_selector('div.pagination') }
     end
   end
   describe "Help page" do
