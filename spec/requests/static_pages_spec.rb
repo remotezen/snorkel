@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "StaticPages" do
   subject { page }
+  
   describe "Home Page" do
     let(:heading) {'Snorkel'}
     let(:page_title) {''}
@@ -13,6 +14,22 @@ describe "StaticPages" do
       expect(page).to have_title(full_title('Help') )
       click_link 'Home' 
       expect(page).to have_title(full_title(''))
+    end
+    describe "for signed in users" do 
+      let(:user) { FactoryGirl.create(:user) }
+      before do 
+        FactoryGirl.create(:micropost, user: user,
+                          content: "Lorem ipsum")
+
+        FactoryGirl.create(:micropost, user: user,
+                          content: "Dolor sit amet")
+        visit root_path
+      end
+      it "should render the user's feed" do 
+        user.feed.each do |i|
+         expect(page).to have_selector("li##{ i.id }", text: i.content)
+        end
+      end
     end
   end
   describe "Help page" do

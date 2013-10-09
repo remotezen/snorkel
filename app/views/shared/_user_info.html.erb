@@ -1,0 +1,13 @@
+<!-Message.all.group_by { |m| m.created_at.beginning_of_month } ->
+<%= link_to gravatar_for(current_user, size:52), current_user %>
+<h3>
+  <%= current_user.name %>
+</h3>
+<span>
+  <%= link_to "View my profile", current_user %>
+</span>
+<span>
+  <%= pluralize(current_user.microposts.count, "micropost") %>
+</span>
+
+

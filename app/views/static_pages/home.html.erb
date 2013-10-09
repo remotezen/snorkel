@@ -1,9 +1,27 @@
-<div class='center hero-unit'>
-
-<h1>Snorkel Home</h1>
-
-<%= link_to "Already have a snorkel?", current_user, class: "btn btn-large btn-primary"%>
-<% unless current_user%>
-  <%= link_to "Start Sorkeling", signup_path, class: "btn btn-large btn-primary"%>
-<%end%>
-</div>
+  <% if signed_in? %>
+    <div class="row ">
+      <aside class="span4">
+        <section>
+          <%= render 'shared/user_info' %>
+        </section>
+        <section>
+        <%= render 'shared/micropost_form' %>
+          
+        </section>
+      </aside>
+      <div class="span8 pull-right">
+        <h6 class="feed">Snorks</h6>
+          <%= render 'shared/feed' %>
+      </div>
+    </div>
+  <% else %>
+  <div class='center hero-unit'>
+    <h1>Snorkel Home</h1>
+    <%= link_to "Already have a snorkel?", 
+      current_user, class: "btn btn-large btn-primary"%>
+    <% unless current_user%>
+      <%= link_to "Start Sorkeling", signup_path, 
+        class: "btn btn-large btn-primary"%>
+    <%end%>
+  </div>
+<% end %>

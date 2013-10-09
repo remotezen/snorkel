@@ -97,7 +97,6 @@ describe "Authentication" do
         end
 =end      
       end
-=begin      
 
       describe "in the Microposts controller" do
 
@@ -107,11 +106,10 @@ describe "Authentication" do
         end
 
         describe "submitting to the destroy action" do
-          before { delete micropost_path(FactoryGirl.create(:micropost)) }
+          before { delete microposts_path(FactoryGirl.create(:micropost)) }
           specify { expect(response).to redirect_to(signin_path) }
         end
       end
-=end      
 =begin
       describe "in the Relationships controller" do
         describe "submitting to the create action" do
@@ -155,5 +153,6 @@ describe "Authentication" do
         specify { expect(response).to redirect_to(root_url) }
       end
     end
+    
   end
 end
