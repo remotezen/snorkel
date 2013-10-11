@@ -26,6 +26,7 @@ describe "MicropostPages" do
         expect { click_button "Post" }.to change(Micropost, :count).by(1)
       end
     end
+    
   end
   describe "micropost destruction" do 
     before { FactoryGirl.create(:micropost, user: user) }

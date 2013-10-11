@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 include ApplicationHelper
 
 
@@ -29,6 +31,7 @@ def sign_in(user, options={})
     click_button "Sign in"
   end
 end
+
 
 RSpec::Matchers.define :have_error_message do |message|
   match do |page|
