@@ -5,6 +5,8 @@ Snorkel::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
 
   match "/signup", to: "users#new", via: 'get'
+  match "/logins", to: 
+    "logins#index", via:'get'
   root 'static_pages#home'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'

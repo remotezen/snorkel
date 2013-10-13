@@ -14,6 +14,12 @@ describe User do
   it { should respond_to :microposts }
   it { should respond_to :feed }
   it { should be_valid }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
+  it { should respond_to(:followers) }
   it { should_not be_admin }
   describe "with admin attribute set to 'true'" do 
     before do 
@@ -140,4 +146,23 @@ describe User do
       its(:feed) { should_not include(unfollowed_post) }
     end
   end
+  describe "Following" do 
+    let(:other) { FactoryGirl.create(:user) }
+    before do 
+      @user.save
+      @user.follow!(other)
+    end
+    it { should be_following(other) }
+    its(:followed_users) { should include(other) }
+  describe "and unfollowing" do 
+    before { @user.unfollow!(other) }
+    it { should_not be_following(other) }
+    its(:followed_users) { should_not include(other) }
+  end
+  describe "followed user" do 
+    subject { other } 
+    its(:followers){ should include(@user) }
+
+  end
+ end
 end

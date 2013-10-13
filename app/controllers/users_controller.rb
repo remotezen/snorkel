@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in @user
+
       flash[:success] = "Start Snorkeling"
       redirect_to @user
     else
@@ -63,7 +64,7 @@ class UsersController < ApplicationController
   end
   private
   def limit_signed_in_user
-    redirect_to root_url
+    redirect_to root_url unless !signed_in?
 
   end
   def user_params

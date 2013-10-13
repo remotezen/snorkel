@@ -1,8 +1,9 @@
 <div class='center hero-unit'>
   <h1>Snorkel Home</h1>
+  <% if current_user %>
   <%= link_to "Already have a snorkel?", 
     current_user, class: "btn btn-large btn-primary"%>
-  <% unless current_user%>
+  <% else current_user%>
     <%= link_to "Start Sorkeling", signup_path, 
       class: "btn btn-large btn-primary"%>
   <%end%>

@@ -1,0 +1,17 @@
+<% if logged_in? %>
+  <!-- user last login-->
+  <p class=login-status>
+    <%=" #{ current_user.name } has been logged in for #{time_ago_in_words(last_login)}" %>
+    <%= " and has logged in #{ pluralize(current_user.logins.count, 'time')}" %>
+  </p>
+  <!-- here we create a social layer for logged
+  in users
+  -->
+  <% if @login_items.any? %>
+  <ol class='login-items'>
+    <%= render partial: 'shared/login_item', :spacer=> tag(:hr), collection: @login_items %>
+  </ol>
+  <%= will_paginate @login_items %>
+  <% end %>
+
+<% end %>
