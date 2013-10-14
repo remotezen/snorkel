@@ -8,7 +8,8 @@
       </h1>
     </section>
   </aside>
-  <div class="span">
+  <div class="span8">
+    <%= render 'follow_form' if signed_in? %>
     <% if @user.microposts.any? %>
       <h3 class="microposts-count"><%= @user.microposts.count %></h3>
       <ol class="microposts" >

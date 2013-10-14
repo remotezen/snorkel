@@ -3,6 +3,7 @@ Snorkel::Application.routes.draw do
   resources :users
   resources :sessions, only: [ :new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   match "/signup", to: "users#new", via: 'get'
   match "/logins", to: 
@@ -32,11 +33,11 @@ Snorkel::Application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
+     resources :users do
+       member do
+         get :following, :followers
+       end
+      end
   #
   #     collection do
   #       get 'sold'

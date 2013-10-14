@@ -36,14 +36,23 @@ describe "StaticPages" do
          expect(page).to have_selector("li##{ i.id }", text: i.content)
         end
       end
+      describe "follower/following counts" do 
+        let (:other) { FactoryGirl.create(:user) }
+        before do 
+          other.follow!(user)
+          visit root_path
+        end
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers, href: followers_user_path(user)") }
+      end
       describe "pagination" do 
         before(:all) { 100.times { FactoryGirl.create(:micropost, 
                                                       user: user, content: "Foo") } }
-        it { should have_selector('div.pagination'); save_and_open_page }
+        ##################SAVE_AND_OPEN_PAGE BIG DEAL FOR DEBUGGING
+        it { should have_selector('div.pagination'); } #save_and_open_page 
         after(:all) { Micropost.delete_all }
         after(:all){ User.delete_all }
     end
-
   end
   describe "Help page" do
     before {visit help_path}
@@ -62,5 +71,6 @@ describe "StaticPages" do
     let(:heading) { 'Help' } 
     let(:page_title) { 'Help' }
   end
+
 end
 end
