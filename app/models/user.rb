@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
    uniqueness: { case_sensitive: false } 
  validates :password, length: { minimum: 6 }
   def  feed
-    Micropost.where("user_id= ?", id)
+    Micropost.from_user_followed_by(self)
   end
   def login_stats
     Login.find(:all, conditions:{ login_status:true })
