@@ -1,6 +1,6 @@
 <li>
   <%= gravatar_for(login_item.user, { size:15 }) %>
-  <%=link_to login_item.user.name, login_item.user %>
+  <%=link_to login_item.user.username, login_item.user %>
     <%=" has been logged in for #{time_ago_in_words(last_login)}" %>
     <%= " and has logged in #{ pluralize(login_item.user.logins.count, 'time')}" %>
 </li>
