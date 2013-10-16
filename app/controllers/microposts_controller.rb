@@ -2,11 +2,17 @@ class MicropostsController < ApplicationController
   before_action :signed_in_user, only: [:create,:destroy]
   before_action :correct_user, only: :destroy
   def create
-    @micropost = current_user.microposts.build(micropost_params)
-
-      regEx = /\A(@[\w]+[\s]+)([\w\s]+)\z/
-      reply_to($1,$2) if  micropost_params[:content].to_s =~ regEx 
-      razor(@micropost)
+    regEx = /\A(@[\w]+[\s]+)([\w\s]+)\z/
+    str = micropost_params[:content] 
+    m = regEx.match(str)
+    username = m[1]
+    content  = m[2]
+    if m.nil?
+     @micropost = current_user.microposts.build(micropost_params)
+     razor(@micropost)
+    else
+     reply_to(username,content) unless m.nil? 
+    end
   end
 
   def new
@@ -33,13 +39,19 @@ class MicropostsController < ApplicationController
 
 
     def reply_to(username,content)
-      name = username.to_s.slice(0).squish
-      user = User.find_by_username(name)
-      hsh = HashWithIndifferentAccess.new(to: user.id)
-      micropost_params[:content] = content
-      micropost_params.merge!(hsh)
-      @micropost = current_user.microposts.build(micropost_params)
+      username.slice!(0)
+      user = User.find_by_username(username.squish) 
+      if user.nil?
+        flash[:error] = "no such user"
+        redirect_to root_url
+      else
+
+      micro = micropost_params
+      micro[:content]= content
+      micro[:to]=user.id
+      @micropost = current_user.microposts.build(micro)
       razor(@micropost)
+      end
     end
     def razor(micropost)
       if @micropost.save
